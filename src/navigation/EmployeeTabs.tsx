@@ -1,6 +1,6 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import EmployeeDashboardScreen from '../screens/Employee/EmployeeDashboardScreen'
+import EmployeeDashboardScreen from '../screens/Admin/EmployeeDashboardScreen'
 import CheckInOutScreen from '../screens/Employee/CheckInOutScreen'
 import ScheduleScreen from '../screens/Employee/ScheduleScreen'
 import ProfileScreen from '../screens/Employee/ProfileScreen'

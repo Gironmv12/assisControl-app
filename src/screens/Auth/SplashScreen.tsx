@@ -20,11 +20,11 @@ const SplashScreen = () => {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../../../assets/logo_dark.png')}
+        source={require('../../../assets/logo_azul.png')}
         style={styles.logo}
         resizeMode="contain"
       />
-      <ActivityIndicator size="large" color="#000" />
+      <ActivityIndicator size="large" color="#0064E0" />
     </View>
   )
 }

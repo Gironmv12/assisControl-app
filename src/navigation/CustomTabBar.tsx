@@ -15,7 +15,7 @@ export default function CustomTabBar({ state, descriptors, navigation }: BottomT
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key]
         const isFocused = state.index === index
-        const color = isFocused ? '#1f1f1f' : '#8e8e93'
+        const color = isFocused ? '#141c1e' : '#9ea7ae'
 
         // Label
         let labelElement: ReactNode

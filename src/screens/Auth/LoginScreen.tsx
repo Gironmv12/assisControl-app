@@ -3,17 +3,17 @@ import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
-  Platform,
   Dimensions,
   Text,
   TextInput,
   TouchableOpacity,
-  Image // Import para el logo
+  Image
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../../navigation/types'
 import { loginUser } from '../../api/authApi'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 type LoginScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Login'>
 
@@ -25,6 +25,8 @@ export default function LoginScreen() {
   const handleLogin = async () => {
     try {
       const data = await loginUser(username, password)
+      // Guarda la respuesta de autenticación en AsyncStorage
+      await AsyncStorage.setItem('authData', JSON.stringify(data))
       if (data.rol === 'admin') {
         navigation.navigate('AdminStack')
       } else {
@@ -38,9 +40,8 @@ export default function LoginScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
-        {/* Logo */}
         <Image
-          source={require('../../../assets/logo_dark.png')}
+          source={require('../../../assets/logo_azul.png')}
           style={styles.logo}
           resizeMode='contain'
         />
@@ -98,7 +99,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter_400Regular',
   },
   button: {
-    backgroundColor: '#1f1f1f',
+    backgroundColor: '#0064e0',
     paddingVertical: 10,
     paddingHorizontal: 16,
     borderRadius: 8,

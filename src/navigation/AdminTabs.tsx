@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import AdminDashboardScreen from '../screens/Admin/AdminDashboardScreen'
-import EmployeeDashboardScreen from '../screens/Employee/EmployeeDashboardScreen'
+import EmployeeDashboardScreen from '../screens/Admin/EmployeeDashboardScreen'
 import AttendanceManagementScreen from '../screens/Admin/AttendanceManagementScreen'
 import ReportsScreen from '../screens/Admin/ReportsScreen'
 import ProfileScreenAdmin from '../screens/Admin/ProfileScreenAdmin'

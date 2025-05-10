@@ -80,7 +80,6 @@ export default function AssisRegistered() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#FFF',
     borderRadius: 12,
   },
   header: {
@@ -93,10 +92,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 12,
-    borderWidth: 1,
     borderRadius: 8,
-    borderColor: '#e0e0e0',
-    backgroundColor: '#f5f5f5',
+    backgroundColor: '#f0f4f7',
     paddingHorizontal: 12,
   },
   icon: {
