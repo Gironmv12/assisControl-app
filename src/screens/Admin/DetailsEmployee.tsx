@@ -1,0 +1,264 @@
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, ActivityIndicator, ScrollView, TouchableOpacity } from 'react-native';
+import { useRoute } from '@react-navigation/native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { fecthEmployeeById, Empleado } from '../../api/employeeApi';
+import { Mail, Phone, Building2, Briefcase, Calendar, Clock, Pencil, Trash2 } from 'lucide-react-native';
+
+interface RouteParams {
+  id: number;
+}
+
+export default function DetailsEmployee() {
+  const route = useRoute();
+  const { id } = route.params as RouteParams;
+  const [employee, setEmployee] = useState<Empleado | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const loadEmployee = async () => {
+      try {
+        const data = await fecthEmployeeById(id);
+        setEmployee(data);
+      } catch (error) {
+        console.error("Error fetching employee details:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadEmployee();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <View style={styles.center}>
+        <ActivityIndicator size="large" color="#007bff" />
+      </View>
+    );
+  }
+
+  if (!employee) {
+    return (
+      <View style={styles.center}>
+        <Text>No se encontraron datos del empleado.</Text>
+      </View>
+    );
+  }
+
+  // Extraemos datos adicionales con fallback en caso de que no existan en la respuesta
+  const fullName = `${employee.usuario.persona.nombre} ${employee.usuario.persona.apellido_paterno} ${employee.usuario.persona.apellido_materno}`;
+  const curp = (employee.usuario.persona as any).curp || 'N/A';
+  const email = (employee.usuario.persona as any).correo || 'N/A';
+  const phone = (employee.usuario.persona as any).telefono || 'N/A';
+
+  // Mapeamos el horario laboral
+  const schedule = employee.horarios_laborales.map(horario => ({
+    day: horario.dia_semana,
+    hours: `${horario.hora_inicio} - ${horario.hora_fin}`
+  }));
+
+  return (
+    <SafeAreaView style={styles.container} edges={['top']}>
+      <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
+        {/* Header Section */}
+        <View style={styles.header}>
+          <View style={styles.avatarContainer}>
+            <Text style={styles.avatarText}>
+              {employee.usuario.persona.nombre.charAt(0).toUpperCase()}
+            </Text>
+          </View>
+          <Text style={styles.name}>{fullName}</Text>
+          <Text style={styles.curp}>CURP: {curp}</Text>
+        </View>
+
+        {/* Contact Information */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Informacion de contacto</Text>
+          <View style={styles.infoContainer}>
+            <View style={styles.infoRow}>
+              <Mail size={20} color="#4D96FF" />
+              <Text style={styles.infoText}>{email}</Text>
+            </View>
+            <View style={styles.infoRow}>
+              <Phone size={20} color="#4D96FF" />
+              <Text style={styles.infoText}>{phone}</Text>
+            </View>
+          </View>
+        </View>
+
+        {/* Work Information */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Informacion de trabajo</Text>
+          <View style={styles.infoContainer}>
+            <View style={styles.infoRow}>
+              <Building2 size={20} color="#4D96FF" />
+              <Text style={styles.infoText}>{employee.departamento}</Text>
+            </View>
+            <View style={styles.infoRow}>
+              <Briefcase size={20} color="#4D96FF" />
+              <Text style={styles.infoText}>{employee.puesto}</Text>
+            </View>
+          </View>
+        </View>
+
+        {/* Schedule */}
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Horarios laborales</Text>
+          <View style={styles.scheduleContainer}>
+            {schedule.map((s, index) => (
+              <View key={index} style={styles.scheduleRow}>
+                <View style={styles.scheduleDay}>
+                  <Calendar size={20} color="#4D96FF" />
+                  <Text style={styles.scheduleDayText}>{s.day}</Text>
+                </View>
+                <View style={styles.scheduleHours}>
+                  <Clock size={20} color="#4D96FF" />
+                  <Text style={styles.scheduleHoursText}>{s.hours}</Text>
+                </View>
+              </View>
+            ))}
+          </View>
+        </View>
+
+        {/* Action Buttons */}
+        <View style={styles.actionButtons}>
+          <TouchableOpacity style={[styles.button, styles.editButton]}>
+            <Pencil size={20} color="#FFFFFF" />
+            <Text style={styles.buttonText}>Edit</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.button, styles.deleteButton]}>
+            <Trash2 size={20} color="#FFFFFF" />
+            <Text style={styles.buttonText}>Delete</Text>
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+  },
+  scrollView: {
+    flex: 1,
+  },
+  header: {
+    alignItems: 'center',
+    padding: 24,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E5E7EB',
+  },
+  avatarContainer: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    backgroundColor: '#4D96FF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  avatarText: {
+    fontFamily: 'Inter-Bold',
+    fontSize: 32,
+    color: '#FFFFFF',
+  },
+  name: {
+    fontFamily: 'Inter-Bold',
+    fontSize: 24,
+    color: '#1F2937',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  curp: {
+    fontFamily: 'Inter-Regular',
+    fontSize: 16,
+    color: '#6B7280',
+  },
+  section: {
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E5E7EB',
+  },
+  sectionTitle: {
+    fontFamily: 'Inter-SemiBold',
+    fontSize: 18,
+    color: '#1F2937',
+    marginBottom: 16,
+  },
+  infoContainer: {
+    rowGap: 12,
+  },
+  infoRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    columnGap: 12,
+  },
+  infoText: {
+    fontFamily: 'Inter-Regular',
+    fontSize: 16,
+    color: '#4B5563',
+  },
+  scheduleContainer: {
+    rowGap: 16,
+  },
+  scheduleRow: {
+    backgroundColor: '#F5F5F5',
+    borderRadius: 8,
+    padding: 12,
+    marginBottom: 8,
+  },
+  scheduleDay: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    columnGap: 8,
+    marginBottom: 8,
+  },
+  scheduleDayText: {
+    fontFamily: 'Inter-SemiBold',
+    fontSize: 16,
+    color: '#1F2937',
+  },
+  scheduleHours: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    columnGap: 8,
+  },
+  scheduleHoursText: {
+    fontFamily: 'Inter-Regular',
+    fontSize: 14,
+    color: '#4B5563',
+  },
+  actionButtons: {
+    flexDirection: 'row',
+    columnGap: 12,
+    padding: 16,
+    paddingBottom: 32,
+  },
+  button: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    columnGap: 8,
+    padding: 12,
+    borderRadius: 8,
+  },
+  editButton: {
+    backgroundColor: '#4D96FF',
+  },
+  deleteButton: {
+    backgroundColor: '#EF4444',
+  },
+  buttonText: {
+    fontFamily: 'Inter-SemiBold',
+    fontSize: 16,
+    color: '#FFFFFF',
+  },
+  center: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});

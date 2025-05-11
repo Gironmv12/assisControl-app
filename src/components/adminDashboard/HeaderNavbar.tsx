@@ -1,19 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Ellipsis } from 'lucide-react-native';
-
-interface Persona {
-  nombre: string;
-  apellido_paterno: string;
-}
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation, CommonActions } from '@react-navigation/native';
 
 interface HeaderAppProps {
-  persona: Persona;
-  onLogout: () => void;
+  title: string;
 }
 
-export default function HeaderApp({ persona, onLogout }: HeaderAppProps) {
+export default function HeaderApp({ title }: HeaderAppProps) {
   const [menuVisible, setMenuVisible] = useState(false);
+  const [persona, setPersona] = useState<{ nombre: string; apellido_paterno: string }>({
+    nombre: '',
+    apellido_paterno: ''
+  });
+
+  const navigation = useNavigation();
+
+  useEffect(() => {
+    async function fetchAuthData() {
+      const authDataString = await AsyncStorage.getItem('authData');
+      if (authDataString) {
+        const authData = JSON.parse(authDataString);
+        setPersona({
+          nombre: authData.persona.nombre,
+          apellido_paterno: authData.persona.apellido_paterno,
+        });
+      }
+    }
+    fetchAuthData();
+  }, []);
+
+  const handleLogout = () => {
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{ name: 'Login' }],
+      })
+    );
+  };
 
   const toggleMenu = () => {
     setMenuVisible(!menuVisible);
@@ -22,19 +47,18 @@ export default function HeaderApp({ persona, onLogout }: HeaderAppProps) {
   return (
     <View style={styles.headerContainer}>
       <View style={styles.textContainer}>
-        <Text style={styles.welcomeText}>Bienvenido de nuevo!</Text>
+        <Text style={styles.welcomeText}>{title}</Text>
         <Text style={styles.nameText}>
           {persona.nombre} {persona.apellido_paterno}
         </Text>
       </View>
-
       <View style={styles.menuContainer}>
         <TouchableOpacity onPress={toggleMenu} style={styles.menuButton}>
-        <Ellipsis size={24} color="#141c1e" />
+          <Ellipsis size={24} color="#141c1e" />
         </TouchableOpacity>
         {menuVisible && (
           <View style={styles.dropdown}>
-            <TouchableOpacity onPress={onLogout}>
+            <TouchableOpacity onPress={handleLogout}>
               <Text style={styles.dropdownItem}>Cerrar sesión</Text>
             </TouchableOpacity>
           </View>
@@ -50,10 +74,10 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   menuContainer: {
-    position: 'relative'
+    position: 'relative',
   },
   menuButton: {
     padding: 8,
@@ -77,12 +101,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   welcomeText: {
-    fontSize: 16,
-    color: '#333'
-  },
-  nameText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#1F2937'
-  }
+    color: '#1F2937',
+  },
+  nameText: {
+    fontSize: 16,
+    color: '#333',
+  },
 });

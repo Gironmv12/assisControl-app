@@ -1,15 +1,19 @@
-import { View, Text, StyleSheet } from 'react-native'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import React from 'react'
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-export default function EmployeeDashboardScreen() {
+import HeaderApp from '../../components/adminDashboard/HeaderNavbar';
+import ListEmployee from '../../components/employee/ListEmployee';
+
+export default function EmployeeDashboardScreen() {  
   return (
-  <SafeAreaView style={styles.safeArea} edges={['top']}>
-    <View style={[{ flex: 1 }]}>
-      <Text>Hola</Text>
-    </View>
-  </SafeAreaView>
-  )
+    <SafeAreaView style={styles.safeArea} edges={['top']}>
+      <View style={{ flex: 1 }}>
+         <HeaderApp title="Gestion de Empleados" />
+         <ListEmployee />
+      </View>
+    </SafeAreaView>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -18,4 +22,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
     paddingHorizontal: 16,
   }
-})
+});
