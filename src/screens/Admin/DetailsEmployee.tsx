@@ -1,33 +1,41 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, ActivityIndicator, ScrollView, TouchableOpacity } from 'react-native';
-import { useRoute } from '@react-navigation/native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { fecthEmployeeById, Empleado } from '../../api/employeeApi';
-import { Mail, Phone, Building2, Briefcase, Calendar, Clock, Pencil, Trash2 } from 'lucide-react-native';
+import React, { useState, useCallback } from 'react'
+import { View, Text, StyleSheet, ActivityIndicator, ScrollView, TouchableOpacity } from 'react-native'
+import { useRoute, useNavigation, useFocusEffect } from '@react-navigation/native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { fecthEmployeeById, Empleado, deleteEmployee } from '../../api/employeeApi'
+import { Mail, Phone, Building2, Briefcase, Calendar, Clock, Pencil, Trash2 } from 'lucide-react-native'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { AdminStackParamList } from '../../navigation/AdminStack'
+import AppBar from '../../components/adminDashboard/AppBar'
 
 interface RouteParams {
   id: number;
 }
 
 export default function DetailsEmployee() {
+  const navigation = useNavigation<NativeStackNavigationProp<AdminStackParamList>>()
   const route = useRoute();
   const { id } = route.params as RouteParams;
   const [employee, setEmployee] = useState<Empleado | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
-  useEffect(() => {
-    const loadEmployee = async () => {
-      try {
-        const data = await fecthEmployeeById(id);
-        setEmployee(data);
-      } catch (error) {
-        console.error("Error fetching employee details:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    loadEmployee();
-  }, [id]);
+  const loadEmployee = async () => {
+    try {
+      const data = await fecthEmployeeById(id);
+      setEmployee(data);
+    } catch (error) {
+      console.error("Error fetching employee details:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      setLoading(true);
+      loadEmployee();
+    }, [id])
+  );
 
   if (loading) {
     return (
@@ -45,13 +53,19 @@ export default function DetailsEmployee() {
     );
   }
 
-  // Extraemos datos adicionales con fallback en caso de que no existan en la respuesta
+  const handleDelete = async () => {
+    try {
+      await deleteEmployee(employee.id);
+      navigation.navigate('AdminTabs');
+    } catch (error) {
+      console.error("Error deleting employee:", error);
+    }
+  };
+
   const fullName = `${employee.usuario.persona.nombre} ${employee.usuario.persona.apellido_paterno} ${employee.usuario.persona.apellido_materno}`;
   const curp = (employee.usuario.persona as any).curp || 'N/A';
   const email = (employee.usuario.persona as any).correo || 'N/A';
   const phone = (employee.usuario.persona as any).telefono || 'N/A';
-
-  // Mapeamos el horario laboral
   const schedule = employee.horarios_laborales.map(horario => ({
     day: horario.dia_semana,
     hours: `${horario.hora_inicio} - ${horario.hora_fin}`
@@ -59,8 +73,8 @@ export default function DetailsEmployee() {
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
+      <AppBar title="Detalles del empleado" />
       <ScrollView style={styles.scrollView} showsVerticalScrollIndicator={false}>
-        {/* Header Section */}
         <View style={styles.header}>
           <View style={styles.avatarContainer}>
             <Text style={styles.avatarText}>
@@ -71,7 +85,6 @@ export default function DetailsEmployee() {
           <Text style={styles.curp}>CURP: {curp}</Text>
         </View>
 
-        {/* Contact Information */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Informacion de contacto</Text>
           <View style={styles.infoContainer}>
@@ -86,7 +99,6 @@ export default function DetailsEmployee() {
           </View>
         </View>
 
-        {/* Work Information */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Informacion de trabajo</Text>
           <View style={styles.infoContainer}>
@@ -101,7 +113,6 @@ export default function DetailsEmployee() {
           </View>
         </View>
 
-        {/* Schedule */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Horarios laborales</Text>
           <View style={styles.scheduleContainer}>
@@ -120,15 +131,18 @@ export default function DetailsEmployee() {
           </View>
         </View>
 
-        {/* Action Buttons */}
         <View style={styles.actionButtons}>
-          <TouchableOpacity style={[styles.button, styles.editButton]}>
+          <TouchableOpacity
+            style={[styles.button, styles.editButton]}
+            onPress={() => navigation.navigate("EmpleadoFormScreen", { id: employee.id })}
+          >
             <Pencil size={20} color="#FFFFFF" />
-            <Text style={styles.buttonText}>Edit</Text>
+            <Text style={styles.buttonText}>Editar</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.button, styles.deleteButton]}>
+
+          <TouchableOpacity style={[styles.button, styles.deleteButton]} onPress={handleDelete}>
             <Trash2 size={20} color="#FFFFFF" />
-            <Text style={styles.buttonText}>Delete</Text>
+            <Text style={styles.buttonText}>Eliminar</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>

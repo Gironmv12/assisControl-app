@@ -6,11 +6,15 @@ export interface Persona {
     nombre: string;
     apellido_paterno: string;
     apellido_materno: string;
+    curp: string;
+    correo: string;
+    telefono: string;
 }
 
 // Interface del usuario que contiene la persona
 export interface Usuario {
     persona: Persona;
+    username: string;
 }
 
 // Interface del empleado con la estructura completa retornada por la API
@@ -38,6 +42,25 @@ export interface EmpleadoDatos {
     departamento: string;
     apellido_paterno: string;
     apellido_materno: string;
+}
+
+//nueva interfaz para crear un empleado
+export interface CreateEmployeePayload {
+    nombre: string;
+    apellido_paterno: string;
+    apellido_materno: string;
+    curp: string;
+    correo: string;
+    telefono: string;
+    username: string;
+    password: string;
+    puesto: string;
+    departamento: string;
+    horarios: Array<{
+        dia_semana: string;
+        hora_inicio: string;
+        hora_fin: string;
+    }>;
 }
 
 // Función para obtener la lista de empleados desde la API
@@ -71,5 +94,70 @@ export const fecthEmployeeById = async (id: number): Promise<Empleado> => {
     } catch (error) {
         console.error("Error fetching employee by ID:", error);
         throw new Error("Failed to fetch employee");
+    }
+};
+
+//funcion para consumir el enpoint POST para crear un empleado
+
+export const createEmployee = async (payload: CreateEmployeePayload): Promise<Empleado> => {
+    try {
+        const response = await axios.post<Empleado>(`${API_URL}/empleados/crear`, payload);
+        return response.data;
+    } catch (error: any) {
+        if (error.response) {
+            // El servidor respondió con un código de estado fuera del rango 2xx
+            console.error("Error response data:", error.response.data);
+            console.error("Error response status:", error.response.status);
+            console.error("Error response headers:", error.response.headers);
+        } else if (error.request) {
+            // La solicitud fue hecha pero no se recibió respuesta
+            console.error("Error request:", error.request);
+        } else {
+            // Algo pasó al configurar la solicitud que desencadenó un error
+            console.error("Error message:", error.message);
+        }
+        throw new Error("Failed to create employee");
+    }
+};
+//funcion para consumir el enpoint PUT para actualizar un empleado
+export const updateEmployee = async (id: number, payload: CreateEmployeePayload): Promise<Empleado> => {
+    try {
+        const response = await axios.put<Empleado>(`${API_URL}/empleados/${id}`, payload);
+        return response.data;
+    } catch (error: any) {
+        if (error.response) {
+            // El servidor respondió con un código de estado fuera del rango 2xx
+            console.error("Error response data:", error.response.data);
+            console.error("Error response status:", error.response.status);
+            console.error("Error response headers:", error.response.headers);
+        } else if (error.request) {
+            // La solicitud fue hecha pero no se recibió respuesta
+            console.error("Error request:", error.request);
+        } else {
+            // Algo pasó al configurar la solicitud que desencadenó un error
+            console.error("Error message:", error.message);
+        }
+        throw new Error("Failed to update employee");
+    }
+}
+
+//funcion para consumir el enpoint DELETE para eliminar un empleado
+export const deleteEmployee = async (id: number): Promise<void> => {
+    try {
+        await axios.delete(`${API_URL}/empleados/${id}`);
+    } catch (error: any) {
+        if (error.response) {
+            // El servidor respondió con un código de estado fuera del rango 2xx
+            console.error("Error response data:", error.response.data);
+            console.error("Error response status:", error.response.status);
+            console.error("Error response headers:", error.response.headers);
+        } else if (error.request) {
+            // La solicitud fue hecha pero no se recibió respuesta
+            console.error("Error request:", error.request);
+        } else {
+            // Algo pasó al configurar la solicitud que desencadenó un error
+            console.error("Error message:", error.message);
+        }
+        throw new Error("Failed to delete employee");
     }
 };
