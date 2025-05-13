@@ -120,6 +120,17 @@ export const createEmployee = async (payload: CreateEmployeePayload): Promise<Em
     }
 };
 //funcion para consumir el enpoint PUT para actualizar un empleado
+/**
+ * Actualiza la información de un empleado existente en el sistema.
+ *
+ * @param id - El identificador único del empleado que se desea actualizar.
+ * @param payload - Los datos del empleado que se desean actualizar, siguiendo la estructura de `CreateEmployeePayload`.
+ * @returns Una promesa que resuelve con los datos del empleado actualizado de tipo `Empleado`.
+ * @throws Lanza un error si ocurre algún problema durante la solicitud de actualización:
+ * - Si el servidor responde con un código de estado fuera del rango 2xx, se registran los detalles del error.
+ * - Si no se recibe respuesta del servidor, se registra la solicitud que falló.
+ * - Si ocurre un error al configurar la solicitud, se registra el mensaje de error.
+ */
 export const updateEmployee = async (id: number, payload: CreateEmployeePayload): Promise<Empleado> => {
     try {
         const response = await axios.put<Empleado>(`${API_URL}/empleados/${id}`, payload);
@@ -142,6 +153,17 @@ export const updateEmployee = async (id: number, payload: CreateEmployeePayload)
 }
 
 //funcion para consumir el enpoint DELETE para eliminar un empleado
+/**
+ * Elimina un empleado dado su ID.
+ *
+ * @param {number} id - El identificador único del empleado a eliminar.
+ * @returns {Promise<void>} Una promesa que se resuelve cuando el empleado ha sido eliminado exitosamente.
+ * @throws {Error} Lanza un error si ocurre algún problema durante la eliminación del empleado.
+ *
+ * - Si el servidor responde con un código de estado fuera del rango 2xx, se registran los detalles de la respuesta.
+ * - Si no se recibe respuesta del servidor, se registran los detalles de la solicitud.
+ * - Si ocurre un error al configurar la solicitud, se registra el mensaje de error.
+ */
 export const deleteEmployee = async (id: number): Promise<void> => {
     try {
         await axios.delete(`${API_URL}/empleados/${id}`);

@@ -1,13 +1,10 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withSpring,
-} from 'react-native-reanimated'
+import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated'
 import dayjs from 'dayjs'
 import 'dayjs/locale/es'
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { useFocusEffect } from '@react-navigation/native'
 
 import HeaderApp from '../../components/adminDashboard/HeaderNavbar'
 import AssisDay from '../../components/adminDashboard/AssisDay'
@@ -22,23 +19,34 @@ export default function AdminDashboardScreen() {
     return { opacity: opacity.value }
   })
 
-  React.useEffect(() => {
-    opacity.value = withSpring(1, {
-      damping: 20,
-      stiffness: 90,
-    })
-  }, [opacity])
+  useFocusEffect(
+    React.useCallback(() => {
+      opacity.value = withSpring(1, {
+        damping: 20,
+        stiffness: 90,
+      })
+      return () => {
+        opacity.value = 0
+      }
+    }, [opacity])
+  )
 
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
-      <Animated.View style={[{ flex: 1 }, animatedStyle]}>
+      <Animated.ScrollView
+        style={[{ flex: 1 }, animatedStyle]}
+        showsVerticalScrollIndicator={false}
+        stickyHeaderIndices={[0]} // El primer elemento (HeaderApp) se mantendrá fijo
+      >
         <HeaderApp title="Dashboard" />
         <View style={styles.container}>
+          <Text style={styles.title}>Dashboard</Text>
+          <Text style={styles.date}>{formattedDate}</Text>
         </View>
         <AssisDay />
         <AssisWeek />
         <AssisRegistered />
-      </Animated.View>
+      </Animated.ScrollView>
     </SafeAreaView>
   )
 }

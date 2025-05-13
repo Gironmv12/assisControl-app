@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { View, Text, StyleSheet, FlatList } from 'react-native';
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { fetchAssistDay } from '../../api/dashboardAdmin';
 import { Clock } from 'lucide-react-native';
+import { useFocusEffect } from '@react-navigation/native';
 
 dayjs.extend(customParseFormat);
 
@@ -23,34 +24,51 @@ interface Assist {
   };
 }
 
+// Función que intenta parsear la hora usando distintos formatos
+const parseTime = (timeStr: string) => {
+  // Definimos los formatos posibles para las horas
+  const formats = ['HH:mm:ss.SSSSS', 'HH:mm:ss.SSSSSS', 'HH:mm:ss.SSS', 'HH:mm:ss'];
+  for (const fmt of formats) {
+    const parsed = dayjs(timeStr, fmt, true);
+    if (parsed.isValid()) {
+      return parsed;
+    }
+  }
+  // Si ninguno funciona, se hace un parseo no estricto
+  return dayjs(timeStr);
+};
+
 export default function AssisRegistered() {
   const [assists, setAssists] = useState<Assist[]>([]);
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const data: Assist[] = await fetchAssistDay();
-        const sorted = data.sort(
-          (a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime()
-        );
-        setAssists(sorted.slice(0, 5));
-      } catch (error) {
-        console.error('Error al obtener las asistencias:', error);
-      }
-    };
+  // Función para obtener y ordenar las asistencias
+  const getData = async () => {
+    try {
+      const data: Assist[] = await fetchAssistDay();
+      const sorted = data.sort(
+        (a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime()
+      );
+      setAssists(sorted.slice(0, 5));
+    } catch (error) {
+      console.error('Error al obtener las asistencias:', error);
+    }
+  };
 
-    getData();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      getData();
+    }, [])
+  );
 
   const renderItem = ({ item }: { item: Assist }) => {
-    // Se define el formato de llegada (con 5 decimales)
-    const formatString = 'HH:mm:ss.SSSSS';
-    //se define fecha
+    // Se formatea la fecha
     const fecha = dayjs(item.fecha).format('DD/MM/YYYY') + ' | ';
-    const horaEntrada = dayjs(item.hora_entrada, formatString).format('HH:mm');
-    const horaSalida = item.hora_salida
-      ? dayjs(item.hora_salida, formatString).format('HH:mm')
-      : '--';
+    // Se parsean las horas usando la función parseTime
+    const horaEntradaParsed = parseTime(item.hora_entrada);
+    const horaSalidaParsed = item.hora_salida ? parseTime(item.hora_salida) : null;
+
+    const horaEntrada = horaEntradaParsed.isValid() ? horaEntradaParsed.format('HH:mm') : '--';
+    const horaSalida = horaSalidaParsed && horaSalidaParsed.isValid() ? horaSalidaParsed.format('HH:mm') : '--';
 
     return (
       <View style={styles.itemContainer}>
@@ -70,6 +88,7 @@ export default function AssisRegistered() {
       <Text style={styles.header}>Control de Asistencia</Text>
       <FlatList
         data={assists}
+        scrollEnabled={false}
         keyExtractor={(item) => item.id.toString()}
         renderItem={renderItem}
         ItemSeparatorComponent={() => <View style={styles.separator} />}
@@ -120,10 +139,4 @@ const styles = StyleSheet.create({
     backgroundColor: '#e0e0e0',
     marginVertical: 8,
   },
-    timeLabel: {
-        fontWeight: 'bold',
-        fontSize: 14,
-        color: '#333',
-        fontFamily: 'Inter_400Regular',
-    },
 });
