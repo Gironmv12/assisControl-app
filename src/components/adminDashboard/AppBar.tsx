@@ -17,7 +17,7 @@ export default function handleBackPress({ title }: AppBarProps) {
   return (
     <View style={styles.container}>
       <TouchableOpacity onPress={handleBackPress} style={styles.backButton}>
-        <ChevronLeft size={24} color="#000" />
+        <ChevronLeft size={24} color="#ffffff" />
       </TouchableOpacity>
       <Text style={styles.title}>{title}</Text>
       {/* Placeholder para centrar el título */}
@@ -31,9 +31,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 16,
-    backgroundColor: '#fff',
     borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
   },
   backButton: {
     padding: 8,
@@ -43,7 +41,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#1F2937',
+    color: '#ffffff',
   },
   rightPlaceholder: {
     width: 32,

@@ -153,9 +153,11 @@ export default function EmpleadoFormScreen() {
           selectedValue={horario.dia_semana}
           onValueChange={(itemValue) => updateHorario(index, { ...horario, dia_semana: itemValue })}
           style={styles.picker}
+          dropdownIconColor="#ffffff"
+          //cambiar color de texto
         >
           {["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"].map(day => (
-            <Picker.Item key={day} label={day} value={day} />
+            <Picker.Item key={day} label={day} value={day} color='#ffffff'  />
           ))}
         </Picker>
         <View style={styles.timeContainer}>
@@ -231,16 +233,16 @@ export default function EmpleadoFormScreen() {
           </View>
         ) : (
           <ScrollView contentContainerStyle={styles.formContainer}>
-            <TextInput placeholder="Nombre" value={nombre} onChangeText={setNombre} style={styles.input} />
-            <TextInput placeholder="Apellido Paterno" value={apellidoPaterno} onChangeText={setApellidoPaterno} style={styles.input} />
-            <TextInput placeholder="Apellido Materno" value={apellidoMaterno} onChangeText={setApellidoMaterno} style={styles.input} />
-            <TextInput placeholder="CURP" value={curp} onChangeText={setCurp} style={styles.input} />
-            <TextInput placeholder="Correo" value={correo} onChangeText={setCorreo} style={styles.input} />
-            <TextInput placeholder="Teléfono" value={telefono} onChangeText={setTelefono} style={styles.input} />
-            <TextInput placeholder="Username" value={username} onChangeText={setUsername} style={styles.input} />
-            <TextInput placeholder="Password" value={password} secureTextEntry onChangeText={setPassword} style={styles.input} />
-            <TextInput placeholder="Puesto" value={puesto} onChangeText={setPuesto} style={styles.input} />
-            <TextInput placeholder="Departamento" value={departamento} onChangeText={setDepartamento} style={styles.input} />
+            <TextInput placeholder="Nombre" value={nombre} onChangeText={setNombre} style={styles.input} placeholderTextColor="#999999" />
+            <TextInput placeholder="Apellido Paterno" value={apellidoPaterno} onChangeText={setApellidoPaterno} style={styles.input} placeholderTextColor="#999999" />
+            <TextInput placeholder="Apellido Materno" value={apellidoMaterno} onChangeText={setApellidoMaterno} style={styles.input} placeholderTextColor="#999999" />
+            <TextInput placeholder="CURP" value={curp} onChangeText={setCurp} style={styles.input} placeholderTextColor="#999999" />
+            <TextInput placeholder="Correo" value={correo} onChangeText={setCorreo} style={styles.input} placeholderTextColor="#999999" />
+            <TextInput placeholder="Teléfono" value={telefono} onChangeText={setTelefono} style={styles.input} placeholderTextColor="#999999" />
+            <TextInput placeholder="Username" value={username} onChangeText={setUsername} style={styles.input} placeholderTextColor="#999999" />
+            <TextInput placeholder="Password" value={password} secureTextEntry onChangeText={setPassword} style={styles.input} placeholderTextColor="#999999" />
+            <TextInput placeholder="Puesto" value={puesto} onChangeText={setPuesto} style={styles.input} placeholderTextColor="#999999" />
+            <TextInput placeholder="Departamento" value={departamento} onChangeText={setDepartamento} style={styles.input} placeholderTextColor="#999999" />
 
             {/* Sección de Horarios */}
             <Text style={styles.sectionTitle}>Horarios laborales</Text>
@@ -268,26 +270,28 @@ export default function EmpleadoFormScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#0d0d0d',
     paddingHorizontal: 16,
   },
   formContainer: {
     padding: 16,
   },
   input: {
-    borderWidth: 1,
-    borderColor: '#ccc',
     padding: 8,
+    height: 40,
     marginBottom: 12,
     borderRadius: 4,
+    backgroundColor: '#1f1f1f',
+
   },
   sectionTitle: {
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 8,
+    color: '#ffffff',
   },
   addHorarioButton: {
-    backgroundColor: '#007bff',
+    backgroundColor: '#0064e0',
     padding: 8,
     borderRadius: 4,
     alignItems: 'center',
@@ -298,7 +302,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   submitButton: {
-    backgroundColor: '#4D96FF',
+    backgroundColor: '#0064e0',
     padding: 12,
     borderRadius: 4,
     alignItems: 'center',
@@ -314,28 +318,28 @@ const styles = StyleSheet.create({
   },
   horarioContainer: {
     marginBottom: 16,
-    borderWidth: 1,
-    borderColor: '#ccc',
     borderRadius: 4,
     padding: 8,
+    backgroundColor: '#1f1f1f',
   },
   picker: {
     height: 50,
     marginBottom: 8,
+    backgroundColor: '#191919',
   },
   timeContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
   timeButton: {
-    backgroundColor: '#4D96FF',
+    backgroundColor: '#0064e0',
     padding: 8,
     borderRadius: 4,
     flex: 1,
     marginHorizontal: 4,
   },
   timeButtonText: {
-    color: '#fff',
+    color: '#ffffff',
     textAlign: 'center',
   },
 });
