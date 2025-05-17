@@ -40,7 +40,6 @@ export default function AdminDashboardScreen() {
       >
         <HeaderApp title="Dashboard" />
         <View style={styles.container}>
-          <Text style={styles.title}>Dashboard</Text>
           <Text style={styles.date}>{formattedDate}</Text>
         </View>
         <AssisDay />
@@ -54,7 +53,7 @@ export default function AdminDashboardScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#0d0d0d',
     paddingHorizontal: 16,
   },
   title: {
@@ -65,7 +64,7 @@ const styles = StyleSheet.create({
   date: {
     fontFamily: 'Inter-Medium',
     fontSize: 14,
-    color: '#4B5563',
+    color: '#FFFFFF',
     textAlign: 'right',
   },
   container: {

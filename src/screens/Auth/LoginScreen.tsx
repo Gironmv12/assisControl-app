@@ -41,7 +41,7 @@ export default function LoginScreen() {
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <Image
-          source={require('../../../assets/logo_azul.png')}
+          source={require('../../../assets/logo_blanco.png')}
           style={styles.logo}
           resizeMode='contain'
         />
@@ -69,7 +69,8 @@ const { width, height } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#ffffff',
   },
   scrollContent: {
     flexGrow: 1,
@@ -87,6 +88,7 @@ const styles = StyleSheet.create({
     marginBottom: 24,
     textAlign: 'center',
     fontFamily: 'Inter_600SemiBold',
+    color: '#ffe6ac',
   },
   input: {
     width: '80%',
@@ -97,9 +99,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     borderRadius: 8,
     fontFamily: 'Inter_400Regular',
+    backgroundColor: '#fff',
   },
   button: {
-    backgroundColor: '#0064e0',
+    backgroundColor: '#ffdba4',
     paddingVertical: 10,
     paddingHorizontal: 16,
     borderRadius: 8,
@@ -107,7 +110,7 @@ const styles = StyleSheet.create({
     width: '80%',
   },
   buttonText: {
-    color: '#fff',
+    color: '#000',
     textAlign: 'center',
     fontFamily: 'Inter_600SemiBold',
   }

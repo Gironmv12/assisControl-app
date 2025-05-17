@@ -183,3 +183,28 @@ export const deleteEmployee = async (id: number): Promise<void> => {
         throw new Error("Failed to delete employee");
     }
 };
+
+/**
+ * Busca empleados por nombre, apellido paterno o apellido materno.
+ *
+ * @param {string} nombre - El nombre o parte del nombre a buscar.
+ * @returns {Promise<Empleado[]>} Una promesa que resuelve con la lista de empleados que coinciden.
+ * @throws Lanza un error si ocurre algún problema durante la solicitud.
+ */
+export const searchEmployees = async (nombre: string): Promise<Empleado[]> => {
+    try {
+        const response = await axios.get<Empleado[]>(`${API_URL}/empleados/buscar/${nombre}`);
+        return response.data;
+    } catch (error: any) {
+        if (error.response) {
+            console.error("Error response data:", error.response.data);
+            console.error("Error response status:", error.response.status);
+            console.error("Error response headers:", error.response.headers);
+        } else if (error.request) {
+            console.error("Error request:", error.request);
+        } else {
+            console.error("Error message:", error.message);
+        }
+        throw new Error("Failed to search employees");
+    }
+};

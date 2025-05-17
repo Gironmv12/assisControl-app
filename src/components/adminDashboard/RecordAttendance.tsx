@@ -248,15 +248,16 @@ const styles = StyleSheet.create({
     color: '#1F2937',
   },
   recordButton: {
-    backgroundColor: '#4D96FF',
-    padding: 16,
+    backgroundColor: '#0064e0',
+    paddingVertical: 12,
     borderRadius: 8,
     alignItems: 'center',
     marginTop: 24,
   },
   recordButtonText: {
-    fontFamily: 'Inter-SemiBold',
-    fontSize: 16,
-    color: '#FFFFFF',
+    fontFamily: 'Inter-Medium',
+        fontWeight: '600',
+        fontSize: 16,
+        color: '#FFFFFF',
   }
 })

@@ -25,47 +25,48 @@ export default function AssisDay() {
   const ausentes = TOTAL_EMPLEADOS - presentes;
 
   return (
-    <View style={styles.container}>
-      <View style={styles.card}>
-        <Users color="#1f2932" size={32} style={styles.icon} />
-        <Text style={styles.number}>{presentes}</Text>
-        <Text style={styles.label}>Presentes</Text>
+    <View style={styles.statsContainer}>
+      <View style={styles.statCard}>
+        <Users color="#7b7b7b" size={32} style={styles.icon} />
+        <Text style={styles.statValue}>{presentes}</Text>
+        <Text style={styles.statLabel}>Presentes</Text>
       </View>
-      <View style={styles.card}>
-        <UserX color="#1f2932" size={32} style={styles.icon} />
-        <Text style={styles.number}>{ausentes}</Text>
-        <Text style={styles.label}>Ausentes</Text>
+      <View style={styles.statCard}>
+        <UserX color="#7b7b7b" size={32} style={styles.icon} />
+        <Text style={styles.statValue}>{ausentes}</Text>
+        <Text style={styles.statLabel}>Ausentes</Text>
       </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  statsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingVertical: 16,
+    paddingHorizontal: 16, // Equivale a SIZES.spacing * 2 (8*2)
+    marginVertical: 16,    // Equivale a SIZES.spacing * 2
   },
-  card: {
-    backgroundColor: '#f0f4f7',
-    borderRadius: 12,
-    paddingVertical: 24,
-    alignItems: 'center',
+  statCard: {
     flex: 1,
-    marginHorizontal: 8,
+    backgroundColor: '#191919', // Color primario claro
+    borderRadius: 8,            // Equivale a SIZES.radiusMedium
+    padding: 16,                // Equivale a SIZES.spacing * 2
+    marginHorizontal: 4,        // Equivale a SIZES.spacing / 2 (8/2)
+    alignItems: 'center',
+  },
+  statValue: {
+    fontFamily: 'Inter_600SemiBold', // Fuente bold
+    fontSize: 28,              // Equivale a SIZES.h2
+    color: '#ffff',          // Color primario
+  },
+  statLabel: {
+    fontFamily: 'Inter_400Regular', // Fuente regular
+    fontSize: 14,                 // Equivale a SIZES.body3
+    color: '#999999',             // Gris oscuro
+    marginTop: 8,                 // Equivale a SIZES.spacing / 2
   },
   icon: {
     marginBottom: 12,
-  },
-  number: {
-    fontSize: 24,
-    color: '#000',
-    fontFamily: 'Inter_600SemiBold',
-    marginBottom: 4,
-  },
-  label: {
-    fontSize: 14,
-    color: '#666',
-    fontFamily: 'Inter_400Regular',
   },
 });

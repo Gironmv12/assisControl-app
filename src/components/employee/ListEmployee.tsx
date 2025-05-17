@@ -2,8 +2,10 @@ import React, { useEffect, useState, useCallback, forwardRef, useImperativeHandl
 import { View, Text, FlatList, StyleSheet, TouchableOpacity, RefreshControl } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { fecthEmployees, EmpleadoDatos } from '../../api/employeeApi';
+import { fecthEmployees, EmpleadoDatos, Empleado } from '../../api/employeeApi';
 import { AdminStackParamList } from '../../navigation/AdminStack';
+
+import EmployeeSearch from './EmployeeSearch';
 
 export type ListEmployeeRef = {
   reloadEmployees: () => Promise<void>;
@@ -41,6 +43,25 @@ const ListEmployee = forwardRef<ListEmployeeRef>((_, ref) => {
         },
     }));
 
+    // Función para actualizar el listado cuando se efectúa una búsqueda.
+    const handleSearchResults = (results: Empleado[]) => {
+        if (results.length === 0) {
+            // Si no hay búsqueda activa, recargamos la lista completa.
+            loadEmployees();
+        } else {
+            // Mapeamos los resultados al tipo EmpleadoDatos.
+            const mapped: EmpleadoDatos[] = results.map(employee => ({
+                id: employee.id,
+                nombre: employee.usuario.persona.nombre,
+                apellido_paterno: employee.usuario.persona.apellido_paterno,
+                apellido_materno: employee.usuario.persona.apellido_materno,
+                puesto: employee.puesto,
+                departamento: employee.departamento,
+            }));
+            setEmployees(mapped);
+        }
+    };
+
     const renderItem = ({ item }: { item: EmpleadoDatos }) => {
         return (
             <TouchableOpacity onPress={() => navigation.navigate('DetailsEmployee', { id: item.id })}>
@@ -63,25 +84,42 @@ const ListEmployee = forwardRef<ListEmployeeRef>((_, ref) => {
     };
 
     return (
-        <FlatList
-            data={employees}
-            keyExtractor={item => item.id.toString()}
-            renderItem={renderItem}
-            refreshControl={
-              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-            }
-            ListFooterComponent={
-                <TouchableOpacity onPress={() => navigation.navigate('EmpleadoFormScreen')}>
-                    <Text style={styles.buttonText}>Crear Empleado</Text>
-                </TouchableOpacity>
-            }
-        />
+        <View style={styles.container}>
+            <EmployeeSearch 
+                onResults={handleSearchResults}
+                placeholder="Buscar por nombre o apellido"
+                style={styles.searchContainer}
+                inputStyle={styles.searchInput}
+            />
+            <FlatList
+                data={employees}
+                keyExtractor={item => item.id.toString()}
+                renderItem={renderItem}
+                refreshControl={
+                  <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                }
+                ListFooterComponent={
+                    <TouchableOpacity onPress={() => navigation.navigate('EmpleadoFormScreen')} style={styles.buttonContainer}>
+                        <Text style={styles.buttonText}>Crear Empleado</Text>
+                    </TouchableOpacity>
+                }
+            />
+        </View>
     );
 });
 
 export default ListEmployee;
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+    },
+    searchContainer: {
+        marginBottom: 12,
+    },
+    searchInput: {
+        // Personaliza el estilo del input según tus necesidades
+    },
     card: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -116,12 +154,17 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: '#555',
     },
+    buttonContainer: {
+    backgroundColor: '#0064e0',
+        paddingVertical: 12,
+        borderRadius: 8,
+        alignItems: 'center',
+        marginTop: 24,
+    },
     buttonText: {
-        backgroundColor: '#007bff',
-        color: '#fff',
-        padding: 8,
-        borderRadius: 4,
-        textAlign: 'center',
-        marginVertical: 16,
+    fontFamily: 'Inter-Medium',
+        fontWeight: '600',
+        fontSize: 16,
+        color: '#FFFFFF',
     },
 });

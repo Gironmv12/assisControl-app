@@ -72,7 +72,7 @@ export default function AssisRegistered() {
 
     return (
       <View style={styles.itemContainer}>
-        <Clock size={24} color="#4A90E2" style={styles.icon} />
+        <Clock size={24} color="#7b7b7b" style={styles.icon} />
         <View style={styles.itemContent}>
           <Text style={styles.employeeName}>{item.usuario.username}</Text>
           <Text style={styles.times}>
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   header: {
     fontSize: 18,
     marginBottom: 16,
-    color: '#333',
+    color: '#fff',
     fontFamily: 'Inter_600SemiBold',
   },
   itemContainer: {
@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 12,
     borderRadius: 8,
-    backgroundColor: '#f0f4f7',
+    backgroundColor: '#191919',
     paddingHorizontal: 12,
   },
   icon: {
@@ -125,18 +125,18 @@ const styles = StyleSheet.create({
   },
   employeeName: {
     fontSize: 16,
-    color: '#333',
+    color: '#fff',
     fontFamily: 'Inter_600SemiBold',
   },
   times: {
     fontSize: 14,
-    color: '#333',
+    color: '#99999999',
     fontFamily: 'Inter_400Regular',
     marginTop: 2,
   },
   separator: {
     height: 1,
-    backgroundColor: '#e0e0e0',
+    backgroundColor: '#99999999',
     marginVertical: 8,
   },
 });

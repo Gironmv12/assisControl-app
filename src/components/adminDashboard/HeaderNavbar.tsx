@@ -54,7 +54,7 @@ export default function HeaderApp({ title }: HeaderAppProps) {
       </View>
       <View style={styles.menuContainer}>
         <TouchableOpacity onPress={toggleMenu} style={styles.menuButton}>
-          <Ellipsis size={24} color="#141c1e" />
+          <Ellipsis size={24} color="#999999" />
         </TouchableOpacity>
         {menuVisible && (
           <View style={styles.dropdown}>
@@ -70,7 +70,6 @@ export default function HeaderApp({ title }: HeaderAppProps) {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    backgroundColor: '#ffffff',
     paddingVertical: 16,
     flexDirection: 'row',
     alignItems: 'center',
@@ -103,10 +102,10 @@ const styles = StyleSheet.create({
   welcomeText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#1F2937',
+    color: '#FFFFFF',
   },
   nameText: {
     fontSize: 16,
-    color: '#333',
+    color: '#999999',
   },
 });

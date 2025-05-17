@@ -40,7 +40,7 @@ export default function AssisWeek() {
     datasets: [
       {
         data: data,
-        color: (opacity = 1) => `rgba(77, 150, 255, ${opacity})`,
+        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`, // Línea de color #0d0d0d
         strokeWidth: 2,
       },
     ],
@@ -49,23 +49,23 @@ export default function AssisWeek() {
   const screenWidth = Dimensions.get('window').width - 32;
 
   const chartConfig = {
-    backgroundColor: '#ffffff',
-    backgroundGradientFrom: '#ffffff',
-    backgroundGradientTo: '#ffffff',
+    backgroundColor: '#fff',
+    backgroundGradientFrom: '#191919',
+    backgroundGradientTo: '#191919',
     decimalPlaces: 0,
-    color: (opacity = 1) => `rgba(77, 150, 255, ${opacity})`,
-    labelColor: (opacity = 1) => `rgba(75, 85, 99, ${opacity})`,
+    color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`, // Elementos en color #fff
+    labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
     style: {
       borderRadius: 12,
     },
     propsForDots: {
       r: '6',
       strokeWidth: '2',
-      stroke: '#ffffff',
+      stroke: '#fff', // Contorno de punto en color #fff
     },
     propsForBackgroundLines: {
       strokeDasharray: '',
-      stroke: '#e5e7eb',
+      stroke: '#fff', // Líneas de fondo en color #fff
       strokeWidth: 1,
     },
   };
@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 18,
     marginBottom: 16,
-    color: '#333',
+    color: '#fff',
     fontFamily: 'Inter_600SemiBold',
   },
   chart: {
@@ -129,13 +129,13 @@ const styles = StyleSheet.create({
   },
   tooltip: {
     position: 'absolute',
-    backgroundColor: '#2563eb',
+    backgroundColor: '#0d0d0d', // Tooltip con color #0d0d0d
     paddingVertical: 4,
     paddingHorizontal: 8,
     borderRadius: 4,
   },
   tooltipText: {
-    color: '#fff',
+    color: '#fff', // Texto en blanco
     fontSize: 14,
     fontFamily: 'Inter_400Regular',
   },
