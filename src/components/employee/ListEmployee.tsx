@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     card: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#f2f2f2',
+        backgroundColor: '#191919',
         padding: 12,
         marginBottom: 12,
         borderRadius: 8,
@@ -149,10 +149,11 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: 'bold',
         marginBottom: 4,
+        color: '#fff',
     },
     detail: {
         fontSize: 14,
-        color: '#555',
+        color: '#999999',
     },
     buttonContainer: {
     backgroundColor: '#0064e0',

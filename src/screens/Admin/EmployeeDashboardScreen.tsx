@@ -28,7 +28,7 @@ export default function EmployeeDashboardScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#0d0d0d',
     paddingHorizontal: 16,
   }
 });

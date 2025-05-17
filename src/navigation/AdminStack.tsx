@@ -33,7 +33,7 @@ const Stack = createNativeStackNavigator<AdminStackParamList>()
 
 const AdminStack = () => {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Navigator screenOptions={{ headerShown: false, gestureEnabled: false }}>
       <Stack.Screen name="AdminTabs" component={AdminTabs} />
       <Stack.Screen name="DetailsEmployee" component={DetailsEmployee} />
       <Stack.Screen name="EmpleadoFormScreen" component={EmpleadoFormScreen} />

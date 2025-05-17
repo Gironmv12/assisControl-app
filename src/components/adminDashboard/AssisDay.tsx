@@ -27,12 +27,12 @@ export default function AssisDay() {
   return (
     <View style={styles.statsContainer}>
       <View style={styles.statCard}>
-        <Users color="#7b7b7b" size={32} style={styles.icon} />
+        <Users color="#0064e0" size={32} style={styles.icon} />
         <Text style={styles.statValue}>{presentes}</Text>
         <Text style={styles.statLabel}>Presentes</Text>
       </View>
       <View style={styles.statCard}>
-        <UserX color="#7b7b7b" size={32} style={styles.icon} />
+        <UserX color="#0064e0" size={32} style={styles.icon} />
         <Text style={styles.statValue}>{ausentes}</Text>
         <Text style={styles.statLabel}>Ausentes</Text>
       </View>

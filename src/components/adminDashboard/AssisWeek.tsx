@@ -40,7 +40,7 @@ export default function AssisWeek() {
     datasets: [
       {
         data: data,
-        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`, // Línea de color #0d0d0d
+        color: (opacity = 1) => `rgba(0, 100, 224, ${opacity})`, // Línea de color #0064e0
         strokeWidth: 2,
       },
     ],

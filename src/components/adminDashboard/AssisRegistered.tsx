@@ -72,7 +72,7 @@ export default function AssisRegistered() {
 
     return (
       <View style={styles.itemContainer}>
-        <Clock size={24} color="#7b7b7b" style={styles.icon} />
+        <Clock size={24} color="#0064e0" style={styles.icon} />
         <View style={styles.itemContent}>
           <Text style={styles.employeeName}>{item.usuario.username}</Text>
           <Text style={styles.times}>
@@ -136,7 +136,6 @@ const styles = StyleSheet.create({
   },
   separator: {
     height: 1,
-    backgroundColor: '#99999999',
     marginVertical: 8,
   },
 });
