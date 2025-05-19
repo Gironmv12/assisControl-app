@@ -18,7 +18,7 @@ export default function AttendanceManagementScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#101010',
     paddingHorizontal: 16,
   }
 })

@@ -53,7 +53,7 @@ export default function ConsultAssistance() {
       <View style={styles.attendanceCard}>
         <View style={styles.cardHeader}>
           <View style={styles.dateContainer}>
-            <Calendar size={20} color="#1F2937" />
+            <Calendar size={20} color="#f4f5f7" />
             <Text style={styles.cardDate}>Fecha: {item.fecha}</Text>
           </View>
         </View>
@@ -99,18 +99,18 @@ export default function ConsultAssistance() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
   },
   title: {
     fontSize: 24,
     fontWeight: '600',
-    marginBottom: 16
+    marginBottom: 16,
+    color: '#F3F5F7',
   },
   historyContainer: {
     gap: 16
   },
   attendanceCard: {
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#181818',
     borderRadius: 12,
     padding: 16,
     marginBottom: 12
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
   cardDate: {
     fontFamily: 'Inter-SemiBold',
     fontSize: 14,
-    color: '#1F2937'
+    color: '#f4f5f7'
   },
   timeContainer: {
     flexDirection: 'row',
@@ -142,13 +142,13 @@ const styles = StyleSheet.create({
   timeLabel: {
     fontFamily: 'Inter-Regular',
     fontSize: 12,
-    color: '#6B7280',
+    color: '#F3F5F7',
     marginBottom: 4,
   },
   timeValue: {
     fontFamily: 'Inter-SemiBold',
     fontSize: 16,
-    color: '#1F2937',
+    color: '#b0b0b0',
   },
   cardFooter: {
     flexDirection: 'row',
@@ -156,12 +156,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 12,
     borderTopWidth: 1,
-    borderTopColor: '#E5E7EB',
+    borderTopColor: '#3d3d3d',
   },
   recordType: {
     fontFamily: 'Inter-Regular',
     fontSize: 12,
-    color: '#6B7280',
+    color: '#b0b0b0',
   },
   editButton: {
     flexDirection: 'row',

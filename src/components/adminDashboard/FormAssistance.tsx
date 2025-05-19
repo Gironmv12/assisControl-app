@@ -58,7 +58,7 @@ export default function FormAssistance() {
         <View style={styles.attendanceCard}>
           <View style={styles.cardHeader}>
             <View style={styles.dateContainer}>
-              <Calendar size={20} color="#1F2937" />
+              <Calendar size={20} color="#f4f5f7" />
               <Text style={styles.cardDate}>Fecha: {attendance.fecha}</Text>
             </View>
           </View>
@@ -119,14 +119,14 @@ export default function FormAssistance() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#101010',
   },
   historyContainer: {
     padding: 16,
     gap: 16,
   },
   attendanceCard: {
-    backgroundColor: '#F5F5F5',
+    backgroundColor: '#181818',
     borderRadius: 12,
     padding: 16,
     marginBottom: 12,
@@ -145,12 +145,13 @@ const styles = StyleSheet.create({
   cardDate: {
     fontFamily: 'Inter-SemiBold',
     fontSize: 14,
-    color: '#1F2937',
+    color: '#f4f5f7',
   },
   timeContainer: {
     flexDirection: 'row',
     gap: 24,
     marginBottom: 12,
+    borderRadius: 12,
   },
   timeBlock: {
     flex: 1,
@@ -158,18 +159,18 @@ const styles = StyleSheet.create({
   timeLabel: {
     fontFamily: 'Inter-Regular',
     fontSize: 12,
-    color: '#6B7280',
+    color: '#F3F5F7',
     marginBottom: 4,
   },
   timeValue: {
     fontFamily: 'Inter-SemiBold',
     fontSize: 16,
-    color: '#1F2937',
+    color: '#b0b0b0',
   },
   input: {
     borderWidth: 1,
-    borderColor: '#ccc',
-    borderRadius: 4,
+    borderColor: '#3d3d3d',
+    borderRadius: 12,
     padding: 8,
     justifyContent: 'center'
   },
@@ -179,7 +180,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingTop: 12,
     borderTopWidth: 1,
-    borderTopColor: '#E5E7EB',
+    borderTopColor: '#3d3d3d',
   },
   editButton: {
     flexDirection: 'row',

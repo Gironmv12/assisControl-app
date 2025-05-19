@@ -92,12 +92,15 @@ export default function RecordAttendance() {
               selectedValue={selectedUsuarioId}
               onValueChange={(itemValue) => setSelectedUsuarioId(itemValue)}
               style={styles.input}
+              dropdownIconColor={'#ffffff'}
             >
               {usuarios.map((user) => (
                 <Picker.Item
                   key={user.id}
                   label={`${user.persona.nombre} ${user.persona.apellido_paterno}`}
                   value={user.persona.id}
+                  color='#ffffff'
+                  style={{ backgroundColor: '#262626' }}
                 />
               ))}
             </Picker>
@@ -167,9 +170,12 @@ export default function RecordAttendance() {
               selectedValue={registroManual}
               onValueChange={(itemValue) => setRegistroManual(itemValue)}
               style={styles.input}
+              dropdownIconColor={'#ffffff'}
             >
-              <Picker.Item label="Admin" value="admin" />
-              <Picker.Item label="Usuario" value="usuario" />
+              <Picker.Item label="Admin" value="admin"  color='#ffffff'
+                  style={{ backgroundColor: '#262626' }}/>
+              <Picker.Item label="Usuario" value="usuario" color='#ffffff'
+                  style={{ backgroundColor: '#262626' }}/>
             </Picker>
           </View>
 
@@ -196,7 +202,7 @@ const styles = StyleSheet.create({
   tabContainer: {
     flexDirection: 'row',
     padding: 8,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: '#181818',
     marginBottom: 16,
     borderRadius: 8,
   },
@@ -207,15 +213,15 @@ const styles = StyleSheet.create({
     borderRadius: 6,
   },
   activeTab: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#1e1e1e',
   },
   tabText: {
     fontFamily: 'Inter-Medium',
     fontSize: 14,
-    color: '#6B7280',
+    color: '#b0b0b0',
   },
   activeTabText: {
-    color: '#4D96FF',
+    color: '#F3F5F7',
   },
   // ...el resto de estilos sin cambios...
   inputGroup: {
@@ -224,28 +230,25 @@ const styles = StyleSheet.create({
   label: {
     fontFamily: 'Inter-Medium',
     fontSize: 14,
-    color: '#374151',
+    color: '#F3F5F7',
     marginBottom: 8,
   },
   input: {
-    borderWidth: 1,
-    borderColor: '#E5E7EB',
     padding: 8,
-    borderRadius: 4,
-    backgroundColor: '#F3F4F6',
+    borderRadius: 12,
   },
   datePickerButton: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 12,
-    backgroundColor: '#F3F4F6',
+    backgroundColor: '#1e1e1e',
     borderRadius: 8,
     gap: 8,
   },
   dateText: {
     fontFamily: 'Inter-Regular',
     fontSize: 16,
-    color: '#1F2937',
+    color: '#F3F5F7',
   },
   recordButton: {
     backgroundColor: '#0064e0',

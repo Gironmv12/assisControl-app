@@ -20,11 +20,11 @@ const SplashScreen = () => {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../../../assets/logo_azul.png')}
+        source={require('../../../assets/logo_blanco.png')}
         style={styles.logo}
         resizeMode="contain"
       />
-      <ActivityIndicator size="large" color="#0064E0" />
+      <ActivityIndicator size="large" color="#F3F5F7" />
     </View>
   )
 }
@@ -34,7 +34,7 @@ export default SplashScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#101010',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -47,6 +47,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: '600',
     marginBottom: 20,
-    color: '#3B82F6',
+    color: '#F3F5F7',
   },
 })
