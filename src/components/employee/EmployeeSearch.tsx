@@ -42,11 +42,11 @@ const EmployeeSearch: React.FC<EmployeeSearchProps> = ({
 
     return (
         <View style={[styles.container, style]}>
-            <Search size={24} color="#E0E0E0" />
+            <Search size={24} color="#626262" />
             <TextInput
                 style={[styles.input, inputStyle]}
                 placeholder={placeholder}
-                placeholderTextColor="#E0E0E0"
+                placeholderTextColor="#626262"
                 value={query}
                 onChangeText={setQuery}
             />
@@ -62,9 +62,8 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         padding: 8,
-        borderWidth: 1,
-        backgroundColor: '#1f1f1f',
-        borderRadius: 8,
+        backgroundColor: '#262626',
+        borderRadius: 12,
         marginBottom: 12,
     },
     input: {

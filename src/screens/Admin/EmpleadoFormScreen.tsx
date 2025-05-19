@@ -154,10 +154,11 @@ export default function EmpleadoFormScreen() {
           onValueChange={(itemValue) => updateHorario(index, { ...horario, dia_semana: itemValue })}
           style={styles.picker}
           dropdownIconColor="#ffffff"
+          
           //cambiar color de texto
         >
           {["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"].map(day => (
-            <Picker.Item key={day} label={day} value={day} color='#ffffff'  />
+            <Picker.Item key={day} label={day} value={day} color='#ffffff' style={{ backgroundColor: '#262626' }}/>
           ))}
         </Picker>
         <View style={styles.timeContainer}>
@@ -233,16 +234,16 @@ export default function EmpleadoFormScreen() {
           </View>
         ) : (
           <ScrollView contentContainerStyle={styles.formContainer}>
-            <TextInput placeholder="Nombre" value={nombre} onChangeText={setNombre} style={styles.input} placeholderTextColor="#999999" />
-            <TextInput placeholder="Apellido Paterno" value={apellidoPaterno} onChangeText={setApellidoPaterno} style={styles.input} placeholderTextColor="#999999" />
-            <TextInput placeholder="Apellido Materno" value={apellidoMaterno} onChangeText={setApellidoMaterno} style={styles.input} placeholderTextColor="#999999" />
-            <TextInput placeholder="CURP" value={curp} onChangeText={setCurp} style={styles.input} placeholderTextColor="#999999" />
-            <TextInput placeholder="Correo" value={correo} onChangeText={setCorreo} style={styles.input} placeholderTextColor="#999999" />
-            <TextInput placeholder="Teléfono" value={telefono} onChangeText={setTelefono} style={styles.input} placeholderTextColor="#999999" />
-            <TextInput placeholder="Username" value={username} onChangeText={setUsername} style={styles.input} placeholderTextColor="#999999" />
-            <TextInput placeholder="Password" value={password} secureTextEntry onChangeText={setPassword} style={styles.input} placeholderTextColor="#999999" />
-            <TextInput placeholder="Puesto" value={puesto} onChangeText={setPuesto} style={styles.input} placeholderTextColor="#999999" />
-            <TextInput placeholder="Departamento" value={departamento} onChangeText={setDepartamento} style={styles.input} placeholderTextColor="#999999" />
+            <TextInput placeholder="Nombre" value={nombre} onChangeText={setNombre} style={styles.input} placeholderTextColor="#b0b0b0" />
+            <TextInput placeholder="Apellido Paterno" value={apellidoPaterno} onChangeText={setApellidoPaterno} style={styles.input} placeholderTextColor="#b0b0b0" />
+            <TextInput placeholder="Apellido Materno" value={apellidoMaterno} onChangeText={setApellidoMaterno} style={styles.input} placeholderTextColor="#b0b0b0" />
+            <TextInput placeholder="CURP" value={curp} onChangeText={setCurp} style={styles.input} placeholderTextColor="#b0b0b0" />
+            <TextInput placeholder="Correo" value={correo} onChangeText={setCorreo} style={styles.input} placeholderTextColor="#b0b0b0" />
+            <TextInput placeholder="Teléfono" value={telefono} onChangeText={setTelefono} style={styles.input} placeholderTextColor="#b0b0b0" />
+            <TextInput placeholder="Username" value={username} onChangeText={setUsername} style={styles.input} placeholderTextColor="#b0b0b0" />
+            <TextInput placeholder="Password" value={password} secureTextEntry onChangeText={setPassword} style={styles.input} placeholderTextColor="#b0b0b0" />
+            <TextInput placeholder="Puesto" value={puesto} onChangeText={setPuesto} style={styles.input} placeholderTextColor="#b0b0b0" />
+            <TextInput placeholder="Departamento" value={departamento} onChangeText={setDepartamento} style={styles.input} placeholderTextColor="#b0b0b0" />
 
             {/* Sección de Horarios */}
             <Text style={styles.sectionTitle}>Horarios laborales</Text>
@@ -255,7 +256,7 @@ export default function EmpleadoFormScreen() {
             </TouchableOpacity>
 
             {isEditMode && (
-              <TextInput placeholder="Rol" value={rol} onChangeText={setRol} style={styles.input} />
+              <TextInput placeholder="Rol" value={rol} onChangeText={setRol} style={styles.input} placeholderTextColor="#b0b0b0" />
             )}
             <TouchableOpacity onPress={handleSubmit} style={styles.submitButton}>
               <Text style={styles.submitButtonText}>{isEditMode ? "Actualizar Empleado" : "Crear Empleado"}</Text>
@@ -270,7 +271,7 @@ export default function EmpleadoFormScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#0d0d0d',
+    backgroundColor: '#101010',
     paddingHorizontal: 16,
   },
   formContainer: {
@@ -280,15 +281,16 @@ const styles = StyleSheet.create({
     padding: 8,
     height: 40,
     marginBottom: 12,
-    borderRadius: 4,
-    backgroundColor: '#1f1f1f',
+    borderRadius: 8,
+    backgroundColor: '#1e1e1e',
+    color: '#F3F5F7',
 
   },
   sectionTitle: {
     fontSize: 16,
     fontWeight: 'bold',
     marginBottom: 8,
-    color: '#ffffff',
+    color: '#F3F5F7',
   },
   addHorarioButton: {
     backgroundColor: '#0064e0',
@@ -325,7 +327,7 @@ const styles = StyleSheet.create({
   picker: {
     height: 50,
     marginBottom: 8,
-    backgroundColor: '#191919',
+    backgroundColor: '#1e1e1e',
   },
   timeContainer: {
     flexDirection: 'row',

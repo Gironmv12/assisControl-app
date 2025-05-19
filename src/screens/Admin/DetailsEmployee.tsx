@@ -89,11 +89,11 @@ export default function DetailsEmployee() {
           <Text style={styles.sectionTitle}>Informacion de contacto</Text>
           <View style={styles.infoContainer}>
             <View style={styles.infoRow}>
-              <Mail size={20} color="#4D96FF" />
+              <Mail size={20} color="#FFFFFF" />
               <Text style={styles.infoText}>{email}</Text>
             </View>
             <View style={styles.infoRow}>
-              <Phone size={20} color="#4D96FF" />
+              <Phone size={20} color="#FFFFFF" />
               <Text style={styles.infoText}>{phone}</Text>
             </View>
           </View>
@@ -103,11 +103,11 @@ export default function DetailsEmployee() {
           <Text style={styles.sectionTitle}>Informacion de trabajo</Text>
           <View style={styles.infoContainer}>
             <View style={styles.infoRow}>
-              <Building2 size={20} color="#4D96FF" />
+              <Building2 size={20} color="#FFFFFF" />
               <Text style={styles.infoText}>{employee.departamento}</Text>
             </View>
             <View style={styles.infoRow}>
-              <Briefcase size={20} color="#4D96FF" />
+              <Briefcase size={20} color="#FFFFFF" />
               <Text style={styles.infoText}>{employee.puesto}</Text>
             </View>
           </View>
@@ -119,11 +119,11 @@ export default function DetailsEmployee() {
             {schedule.map((s, index) => (
               <View key={index} style={styles.scheduleRow}>
                 <View style={styles.scheduleDay}>
-                  <Calendar size={20} color="#4D96FF" />
+                  <Calendar size={20} color="#FFFFFF" />
                   <Text style={styles.scheduleDayText}>{s.day}</Text>
                 </View>
                 <View style={styles.scheduleHours}>
-                  <Clock size={20} color="#4D96FF" />
+                  <Clock size={20} color="#FFFFFF" />
                   <Text style={styles.scheduleHoursText}>{s.hours}</Text>
                 </View>
               </View>
@@ -153,7 +153,7 @@ export default function DetailsEmployee() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#101010',
   },
   scrollView: {
     flex: 1,
@@ -161,8 +161,6 @@ const styles = StyleSheet.create({
   header: {
     alignItems: 'center',
     padding: 24,
-    borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
   },
   avatarContainer: {
     width: 80,
@@ -181,24 +179,22 @@ const styles = StyleSheet.create({
   name: {
     fontFamily: 'Inter-Bold',
     fontSize: 24,
-    color: '#1F2937',
+    color: '#F3F5F7',
     marginBottom: 8,
     textAlign: 'center',
   },
   curp: {
     fontFamily: 'Inter-Regular',
     fontSize: 16,
-    color: '#6B7280',
+    color: '#f4f5f8',
   },
   section: {
     padding: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: '#E5E7EB',
   },
   sectionTitle: {
     fontFamily: 'Inter-SemiBold',
     fontSize: 18,
-    color: '#1F2937',
+    color: '#F3F5F7',
     marginBottom: 16,
   },
   infoContainer: {
@@ -212,14 +208,14 @@ const styles = StyleSheet.create({
   infoText: {
     fontFamily: 'Inter-Regular',
     fontSize: 16,
-    color: '#4B5563',
+    color: '#787878',
   },
   scheduleContainer: {
     rowGap: 16,
   },
   scheduleRow: {
-    backgroundColor: '#F5F5F5',
-    borderRadius: 8,
+    backgroundColor: '#181818',
+    borderRadius: 12,
     padding: 12,
     marginBottom: 8,
   },
@@ -232,7 +228,7 @@ const styles = StyleSheet.create({
   scheduleDayText: {
     fontFamily: 'Inter-SemiBold',
     fontSize: 16,
-    color: '#1F2937',
+    color: '#F3F5F7',
   },
   scheduleHours: {
     flexDirection: 'row',
@@ -242,7 +238,7 @@ const styles = StyleSheet.create({
   scheduleHoursText: {
     fontFamily: 'Inter-Regular',
     fontSize: 14,
-    color: '#4B5563',
+    color: '#787878',
   },
   actionButtons: {
     flexDirection: 'row',

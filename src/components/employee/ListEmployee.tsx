@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     card: {
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#191919',
+        backgroundColor: '#181818',
         padding: 12,
         marginBottom: 12,
         borderRadius: 8,
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
         marginRight: 12,
     },
     profileLetter: {
-        color: '#fff',
+        color: '#F3F5F7',
         fontSize: 24,
         fontWeight: 'bold',
     },
