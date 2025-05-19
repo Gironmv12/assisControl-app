@@ -72,7 +72,7 @@ export default function AssisRegistered() {
 
     return (
       <View style={styles.itemContainer}>
-        <Clock size={24} color="#0064e0" style={styles.icon} />
+        <Clock size={24} color="#FFFFFF" style={styles.icon} />
         <View style={styles.itemContent}>
           <Text style={styles.employeeName}>{item.usuario.username}</Text>
           <Text style={styles.times}>

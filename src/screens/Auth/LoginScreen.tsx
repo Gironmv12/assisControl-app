@@ -41,7 +41,7 @@ export default function LoginScreen() {
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <Image
-          source={require('../../../assets/logo_azul.png')}
+          source={require('../../../assets/logo_blanco.png')}
           style={styles.logo}
           resizeMode='contain'
         />
@@ -50,12 +50,14 @@ export default function LoginScreen() {
           style={styles.input}
           placeholder="Usuario"
           onChangeText={setUsername}
+          placeholderTextColor={'#b0b0b0'}
         />
         <TextInput
           style={styles.input}
           placeholder="Contraseña"
           secureTextEntry
           onChangeText={setPassword}
+          placeholderTextColor={'#b0b0b0'}
         />
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Login</Text>
@@ -70,7 +72,7 @@ const { width, height } = Dimensions.get('window')
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#101010',
   },
   scrollContent: {
     flexGrow: 1,
@@ -88,29 +90,30 @@ const styles = StyleSheet.create({
     marginBottom: 24,
     textAlign: 'center',
     fontFamily: 'Inter_600SemiBold',
-    color: '#000',
+    color: '#F3F5F7',
   },
   input: {
     width: '80%',
-    height: 45,
-    borderWidth: 1,
-    borderColor: '#ccc',
+    height: 48,
     marginBottom: 12,
     paddingHorizontal: 8,
-    borderRadius: 8,
+    borderRadius: 12,
     fontFamily: 'Inter_400Regular',
-    backgroundColor: '#fff',
+    backgroundColor: '#1e1e1e',
+    color: '#F3F5F7',
   },
   button: {
-    backgroundColor: '#0064e0',
+    backgroundColor: '#FFFFFF',
     paddingVertical: 10,
     paddingHorizontal: 16,
-    borderRadius: 8,
+    borderRadius: 12,
     marginTop: 8,
     width: '80%',
+    height: 48,
+    justifyContent: 'center',
   },
   buttonText: {
-    color: '#fff',
+    color: '#101010',
     textAlign: 'center',
     fontFamily: 'Inter_600SemiBold',
   }

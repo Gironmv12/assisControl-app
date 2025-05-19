@@ -40,7 +40,7 @@ export default function AssisWeek() {
     datasets: [
       {
         data: data,
-        color: (opacity = 1) => `rgba(0, 100, 224, ${opacity})`, // Línea de color #0064e0
+        color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`, // Línea de color #0064e0
         strokeWidth: 2,
       },
     ],
@@ -50,8 +50,8 @@ export default function AssisWeek() {
 
   const chartConfig = {
     backgroundColor: '#fff',
-    backgroundGradientFrom: '#191919',
-    backgroundGradientTo: '#191919',
+    backgroundGradientFrom: '#181818',
+    backgroundGradientTo: '#181818',
     decimalPlaces: 0,
     color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`, // Elementos en color #fff
     labelColor: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,

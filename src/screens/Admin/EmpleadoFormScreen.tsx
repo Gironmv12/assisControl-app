@@ -228,7 +228,7 @@ export default function EmpleadoFormScreen() {
       <View style={{ flex: 1 }}>
         <AppBar title={isEditMode ? "Editar Empleado" : "Crear Empleado"} />
         {loading ? (
-          <View style={styles.center}>
+          <View style={styles.center}> 
             <Text>Cargando...</Text>
           </View>
         ) : (

@@ -1,6 +1,6 @@
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import Animated, { useSharedValue, useAnimatedStyle, withSpring } from 'react-native-reanimated'
+import React, { useRef } from 'react'
+import { View, Text, StyleSheet, Animated } from 'react-native'
+import { useSharedValue, useAnimatedStyle, withSpring, clamp } from 'react-native-reanimated'
 import dayjs from 'dayjs'
 import 'dayjs/locale/es'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -12,6 +12,7 @@ import AssisWeek from '../../components/adminDashboard/AssisWeek'
 import AssisRegistered from '../../components/adminDashboard/AssisRegistered'
 
 export default function AdminDashboardScreen() {
+
   const formattedDate = dayjs().locale('es').format('dddd, D [de] MMMM [de] YYYY')
 
   const opacity = useSharedValue(0)
@@ -53,7 +54,7 @@ export default function AdminDashboardScreen() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#0d0d0d',
+    backgroundColor: '#101010',
     paddingHorizontal: 16,
   },
   title: {

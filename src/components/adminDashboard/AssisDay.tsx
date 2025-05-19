@@ -27,12 +27,12 @@ export default function AssisDay() {
   return (
     <View style={styles.statsContainer}>
       <View style={styles.statCard}>
-        <Users color="#0064e0" size={32} style={styles.icon} />
+        <Users color="#FFFFFF" size={32} style={styles.icon} />
         <Text style={styles.statValue}>{presentes}</Text>
         <Text style={styles.statLabel}>Presentes</Text>
       </View>
       <View style={styles.statCard}>
-        <UserX color="#0064e0" size={32} style={styles.icon} />
+        <UserX color="#FFFFFF" size={32} style={styles.icon} />
         <Text style={styles.statValue}>{ausentes}</Text>
         <Text style={styles.statLabel}>Ausentes</Text>
       </View>
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   },
   statCard: {
     flex: 1,
-    backgroundColor: '#191919', // Color primario claro
+    backgroundColor: '#181818', // Color primario claro
     borderRadius: 8,            // Equivale a SIZES.radiusMedium
     padding: 16,                // Equivale a SIZES.spacing * 2
     marginHorizontal: 4,        // Equivale a SIZES.spacing / 2 (8/2)
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
   statValue: {
     fontFamily: 'Inter_600SemiBold', // Fuente bold
     fontSize: 28,              // Equivale a SIZES.h2
-    color: '#ffff',          // Color primario
+    color: '#f4f5f7',          // Color primario
   },
   statLabel: {
     fontFamily: 'Inter_400Regular', // Fuente regular
