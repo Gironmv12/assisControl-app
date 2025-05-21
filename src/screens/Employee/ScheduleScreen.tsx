@@ -1,10 +1,22 @@
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
+import { SafeAreaView } from 'react-native-safe-area-context'
+
+import HeaderApp from '../../components/adminDashboard/HeaderNavbar'
 
 export default function ScheduleScreen() {
   return (
-    <View>
+    <SafeAreaView style={styles.safeArea} edges={['top']}>
+      <HeaderApp title='Horario' />
       <Text>ScheduleScreen</Text>
-    </View>
+    </SafeAreaView>
   )
 }
+
+const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+    backgroundColor: '#101010',
+    paddingHorizontal: 16,
+  }
+})

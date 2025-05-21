@@ -14,7 +14,7 @@ export default function CustomTabBarEmployee({ state, descriptors, navigation }:
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key]
         const isFocused = state.index === index
-        const color = isFocused ? '#007AFF' : '#8e8e93'
+        const color = isFocused ? '#fff' : '#6d6d6d'
 
         // Label
         let labelElement: ReactNode
@@ -81,12 +81,10 @@ export default function CustomTabBarEmployee({ state, descriptors, navigation }:
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    backgroundColor: 'white',
+    backgroundColor: '#282828',
     height: 70,
     justifyContent: 'space-around',
     alignItems: 'center',
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
     overflow: 'hidden',
     paddingBottom: 12,
   },

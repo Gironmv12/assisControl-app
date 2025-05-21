@@ -179,7 +179,7 @@ export default function EmpleadoFormScreen() {
           <DateTimePicker
             value={timeInicio}
             mode="time"
-            is24Hour={true}
+            is24Hour={false}
             display="default"
             onChange={(event, date) => {
               setShowInicio(false);
@@ -194,7 +194,7 @@ export default function EmpleadoFormScreen() {
           <DateTimePicker
             value={timeFin}
             mode="time"
-            is24Hour={true}
+            is24Hour={false}
             display="default"
             onChange={(event, date) => {
               setShowFin(false);
