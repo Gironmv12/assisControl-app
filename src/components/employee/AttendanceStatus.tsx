@@ -1,5 +1,7 @@
 import { View, Text, StyleSheet } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react'
+import { useFocusEffect } from '@react-navigation/native'
+
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getResumen } from '../../api/dashboardEmployee';
 import { Calendar, Clock } from 'lucide-react-native';
@@ -11,7 +13,7 @@ export default function AttendanceStatus() {
       fecha: string;
       hora_entrada: string;
       hora_salida: string;
-    };
+    } | null;
   } | null>(null);
 
   // Función para mostrar solo hora y minutos en formato (HH:MM)
@@ -26,26 +28,41 @@ export default function AttendanceStatus() {
     return hour < 12 ? 'AM' : 'PM';
   };
 
+  const loadStatus = async () => {
+    try {
+      const authData = await AsyncStorage.getItem('authData')
+      if (!authData) return
+      const { token } = JSON.parse(authData)
+      const data = await getResumen(token)
+      setAttendanceStatus({
+        asistencias_del_mes: data.asistencias_del_mes,
+        ultima_asistencia: data.ultima_asistencia
+      })
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
   useEffect(() => {
-    (async () => {
-      try {
-        const authData = await AsyncStorage.getItem('authData');
-        if (authData) {
-          const { token } = JSON.parse(authData);
-          const data = await getResumen(token);
-          setAttendanceStatus({
-            asistencias_del_mes: data.asistencias_del_mes,
-            ultima_asistencia: data.ultima_asistencia
-          });
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    })();
-  }, []);
+    loadStatus()
+  }, [])
+
+  useFocusEffect(
+    useCallback(() => {
+      loadStatus()
+    }, [])
+  )
 
   if (!attendanceStatus) {
     return <Text>Cargando...</Text>;
+  }
+
+  if (attendanceStatus.ultima_asistencia === null) {
+    return (
+      <View style={styles.statCardContent}>
+        <Text style={styles.statTitle}>Aún no registras ninguna asistencia</Text>
+      </View>
+    );
   }
 
   const { asistencias_del_mes, ultima_asistencia } = attendanceStatus;

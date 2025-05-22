@@ -1,6 +1,7 @@
 //// filepath: c:\Users\Giron\Desktop\app_assist_control\src\components\employee\Todays_Schedule.tsx
 import { View, Text, StyleSheet } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react'
+import { useFocusEffect } from '@react-navigation/native'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getResumen } from '../../api/dashboardEmployee';
 import { Clock } from 'lucide-react-native';
@@ -24,20 +25,27 @@ export default function Todays_Schedule() {
     return hour < 12 ? 'AM' : 'PM';
   };
 
+  const loadSchedule = async () => {
+    try {
+      const authData = await AsyncStorage.getItem('authData')
+      if (!authData) return
+      const { token } = JSON.parse(authData)
+      const data = await getResumen(token)
+      setHorarioHoy(data.horario_del_dia)
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
   useEffect(() => {
-    (async () => {
-      try {
-        const authData = await AsyncStorage.getItem('authData');
-        if (authData) {
-          const { token } = JSON.parse(authData);
-          const data = await getResumen(token);
-          setHorarioHoy(data.horario_del_dia);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    })();
-  }, []);
+    loadSchedule()
+  }, [])
+
+  useFocusEffect(
+    useCallback(() => {
+      loadSchedule()
+    }, [])
+  )
 
   if (!horarioHoy) {
     return <Text>Cargando...</Text>;

@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react'
+import { useFocusEffect } from '@react-navigation/native'
 import { BadgeX, BadgeCheck } from 'lucide-react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getResumen } from '../../api/dashboardEmployee';
@@ -7,20 +8,29 @@ import { getResumen } from '../../api/dashboardEmployee';
 export default function Today_Attendance() {
   const [asistenciaHoy, setAsistenciaHoy] = useState<boolean | null>(null);
 
+  const loadAttendance = async () => {
+    try {
+      const authData = await AsyncStorage.getItem('authData')
+      if (!authData) return
+      const { token } = JSON.parse(authData)
+      const data = await getResumen(token)
+      setAsistenciaHoy(data.asistencia_hoy)
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  // Primera carga
   useEffect(() => {
-    (async () => {
-      try {
-        const authData = await AsyncStorage.getItem('authData');
-        if (authData) {
-          const { token } = JSON.parse(authData);
-          const data = await getResumen(token);
-          setAsistenciaHoy(data.asistencia_hoy);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    })();
-  }, []);
+    loadAttendance()
+  }, [])
+
+  // Se vuelve a invocar al hacer foco en esta pantalla
+  useFocusEffect(
+    useCallback(() => {
+      loadAttendance()
+    }, [])
+  )
 
   if (asistenciaHoy === null) {
     return <Text>Cargando...</Text>;
