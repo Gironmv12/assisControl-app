@@ -7,13 +7,15 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  Image
+  Image,
+  View,
 } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { RootStackParamList } from '../../navigation/types'
 import { loginUser } from '../../api/authApi'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { UserRound, Lock } from 'lucide-react-native'
 
 type LoginScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'Login'>
 
@@ -37,7 +39,7 @@ export default function LoginScreen() {
     }
   }
 
-  return (
+return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <Image
@@ -46,21 +48,30 @@ export default function LoginScreen() {
           resizeMode='contain'
         />
         <Text style={styles.title}>Iniciar sesión</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Usuario"
-          onChangeText={setUsername}
-          placeholderTextColor={'#b0b0b0'}
-        />
-        <TextInput
-          style={styles.input}
-          placeholder="Contraseña"
-          secureTextEntry
-          onChangeText={setPassword}
-          placeholderTextColor={'#b0b0b0'}
-        />
+
+        <View style={styles.inputContainer}>
+          <UserRound color="#FFFFFF" size={20} style={styles.inputIcon} />
+          <TextInput
+            style={styles.input}
+            placeholder="Usuario"
+            onChangeText={setUsername}
+            placeholderTextColor="#b0b0b0"
+          />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <Lock color="#FFFFFF" size={20} style={styles.inputIcon} />
+          <TextInput
+            style={styles.input}
+            placeholder="Contraseña"
+            secureTextEntry
+            onChangeText={setPassword}
+            placeholderTextColor="#b0b0b0"
+          />
+        </View>
+
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
-          <Text style={styles.buttonText}>Login</Text>
+          <Text style={styles.buttonText}>Iniciar sesión</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
@@ -92,16 +103,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Inter_600SemiBold',
     color: '#F3F5F7',
   },
-  input: {
-    width: '80%',
-    height: 48,
-    marginBottom: 12,
-    paddingHorizontal: 8,
-    borderRadius: 12,
-    fontFamily: 'Inter_400Regular',
-    backgroundColor: '#1e1e1e',
-    color: '#F3F5F7',
-  },
   button: {
     backgroundColor: '#FFFFFF',
     paddingVertical: 10,
@@ -116,5 +117,23 @@ const styles = StyleSheet.create({
     color: '#101010',
     textAlign: 'center',
     fontFamily: 'Inter_600SemiBold',
-  }
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#1e1e1e',
+    borderRadius: 10,
+    width: '80%',
+    height: 48,
+    paddingHorizontal: 12,
+    marginBottom: 12
+  },
+  inputIcon: {
+    marginRight: 8
+  },
+  input: {
+    flex: 1,
+    color: '#F3F5F7',
+    fontFamily: 'Inter_400Regular'
+  },
 })

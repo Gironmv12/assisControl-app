@@ -3,12 +3,13 @@ import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 import HeaderApp from '../../components/adminDashboard/HeaderNavbar'
+import Schedules from '../../components/employee/Schedules'
 
 export default function ScheduleScreen() {
   return (
     <SafeAreaView style={styles.safeArea} edges={['top']}>
       <HeaderApp title='Horario' />
-      <Text>ScheduleScreen</Text>
+      <Schedules />
     </SafeAreaView>
   )
 }
